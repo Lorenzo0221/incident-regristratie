@@ -1,22 +1,23 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentController;
 
-
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/incidents', [IncidentController::class, 'index'])
-    ->name('incidents.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/incidents/create', [IncidentController::class, 'create'])
-    ->name('incidents.create');
+Route::resource('incidents', IncidentController::class)->middleware('auth');
 
-Route::post('/incidents', [IncidentController::class, 'store'])
-    ->name('incidents.store');
-
-
-Route::redirect('/incidents/index', '/incidents');
+require __DIR__.'/auth.php';

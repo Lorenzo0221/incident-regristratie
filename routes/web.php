@@ -20,5 +20,6 @@ Route::redirect('/incidents/index', '/incidents');
 Route::middleware('auth')->group(function () {
     Route::get('/incidents', [IncidentController::class, 'index'])->name('incidents.index');
     Route::get('/incidents/create', [IncidentController::class, 'create'])->name('incidents.create');
-    Route::post('/incidents', [IncidentController::class, 'store'])->name('incidents.store');
+    // Route::post('/incidents', [IncidentController::class, 'store'])->name('incidents.store');
+    // hoi test lorenxxoo!!!
 }); 

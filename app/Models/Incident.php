@@ -16,4 +16,9 @@ class Incident extends Model
         'status',
         'attachment',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

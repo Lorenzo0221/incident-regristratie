@@ -19,5 +19,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('incidents', IncidentController::class)->middleware('auth');
+Route::get('/incidents/{incident}', [IncidentController::class, 'show'])
+    ->name('incidents.show');
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';

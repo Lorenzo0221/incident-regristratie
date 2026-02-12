@@ -14,6 +14,11 @@ class Incident extends Model
         'type',
         'incident_at',
         'status',
+        'priority',
         'attachment',
+    ];
+
+    protected $casts = [
+        'incident_at' => 'datetime',
     ];
 }

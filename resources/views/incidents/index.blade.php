@@ -15,22 +15,29 @@
     <div class="bg-white rounded shadow divide-y">
         @forelse ($incidents as $incident)
             <div class="p-4">
-                <h2 class="text-lg font-semibold">{{ $incident->title }}</h2>
+                <h2 class="text-lg font-semibold">
+                    <a href="{{ route('incidents.show', $incident) }}" class="text-blue-600 hover:underline">
+                        {{ $incident->title }}
+                    </a>
+                </h2>
 
                 <p class="text-sm text-gray-600 mt-1">
-                    📍 {{ $incident->location ?? 'Onbekend' }}
+                    📍Locatie: {{ $incident->location ?? 'Onbekend' }}
                 </p>
 
                 <p class="text-sm text-gray-500">
-                    📅 {{ $incident->incident_at }}
+                   📆 Datum: {{ optional($incident->incident_at)->format('d-m-Y H:i') }}
                 </p>
 
-                @isset($incident->status)
-                    <p class="text-sm mt-2">
-                        Status:
-                        <span class="font-medium">{{ $incident->status }}</span>
-                    </p>
-                @endisset
+                <p class="text-sm mt-2">
+                    Status:
+                    <span class="font-medium">{{ str_replace('_', ' ', $incident->status ?? 'nieuw') }}</span>
+                </p>
+
+                <p class="text-sm mt-1">
+                    Prioriteit:
+                    <span class="font-medium">{{ $incident->priority ?? 'normaal' }}</span>
+                </p>
             </div>
         @empty
             <div class="p-6 text-center text-gray-500">

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,11 +12,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('incidents', function (Blueprint $table) {
-            $table->foreignId('user_id')
-                ->constrained()
-                ->cascadeOnDelete();
-        });
+        if (!Schema::hasColumn('incidents', 'user_id')) {
+            Schema::table('incidents', function (Blueprint $table) {
+                $table->foreignId('user_id')
+                    ->nullable()
+                    ->constrained()
+                    ->nullOnDelete();
+            });
+        }
+
+        if (Schema::hasColumn('incidents', 'user_id')) {
+            $firstUserId = DB::table('users')->min('id');
+            if ($firstUserId) {
+                DB::table('incidents')
+                    ->whereNull('user_id')
+                    ->update(['user_id' => $firstUserId]);
+            }
+        }
     }
 
 
@@ -25,7 +38,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('incidents', function (Blueprint $table) {
-            //
+            $table->dropConstrainedForeignId('user_id');
         });
     }
 };

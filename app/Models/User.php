@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function assignedIncidents()
+    {
+        return $this->hasMany(Incident::class, 'assignee_id');
+    }
 }

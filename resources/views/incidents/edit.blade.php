@@ -68,6 +68,16 @@
         </div>
 
         <div>
+            <label class="block text-sm font-medium mb-1">Verantwoordelijke</label>
+            <select name="assignee_id" class="w-full rounded border-gray-300">
+                <option value="">Niet toegewezen</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}" @selected(old('assignee_id', $incident->assignee_id) == $user->id)>{{ $user->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
             <label class="block text-sm font-medium mb-1">Bijlage (optioneel)</label>
             @if ($incident->attachment)
                 <p class="text-sm mb-2">

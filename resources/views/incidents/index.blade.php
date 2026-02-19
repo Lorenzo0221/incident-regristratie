@@ -2,17 +2,25 @@
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">Mijn meldingen</h1>
 
-        <a href="{{ route('incidents.create') }}"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            + Nieuwe melding
-        </a>
+        <div class="flex gap-2">
+            <a href="{{ route('incidents.stats') }}"
+                class="border border-gray-300 px-4 py-2 rounded hover:bg-gray-50">
+                Statistieken
+            </a>
+            <a href="{{ route('incidents.create') }}"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                + Nieuwe melding
+            </a>
+        </div>
     </div>
 
     <div class="bg-white rounded shadow divide-y">
-        @forelse ($incidents as $incident)
+        @forelse ($incidents as $incident) 
             <div class="p-4">
                 <h2 class="text-lg font-semibold">{{ $incident->title }}</h2>
-
+               <a href="{{ route('incidents.show', $incident) }}" class="text-blue-600 hover:underline">
+                    Bekijk details
+                </a>
                 <p class="text-sm text-gray-600 mt-1">
                     📍Locatie: {{ $incident->location ?? 'Onbekend' }}
                 </p>

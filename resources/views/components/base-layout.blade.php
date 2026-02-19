@@ -35,6 +35,11 @@
                     class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-700 transition">
                     <span>➕</span> Nieuw incident
                 </a>
+
+                <a href="{{ route('incidents.stats') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-700 transition">
+                    <span>📊</span> Statistieken
+                </a>
             </nav>
 
             <div class="px-6 py-5 border-t border-slate-700 text-sm">

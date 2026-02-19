@@ -37,6 +37,10 @@
                 <div class="text-slate-500">Prioriteit</div>
                 <div class="font-medium">{{ $incident->priority }}</div>
             </div>
+            <div>
+                <div class="text-slate-500">Verantwoordelijke</div>
+                <div class="font-medium">{{ $incident->assignee?->name ?? 'Niet toegewezen' }}</div>
+            </div>
         </div>
 
         @if ($incident->attachment)

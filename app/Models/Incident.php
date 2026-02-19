@@ -8,6 +8,7 @@ class Incident extends Model
 {
     protected $fillable = [
         'user_id',
+        'assignee_id',
         'title',
         'description',
         'location',
@@ -25,5 +26,10 @@ class Incident extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function assignee()
+    {
+        return $this->belongsTo(User::class, 'assignee_id');
     }
 }

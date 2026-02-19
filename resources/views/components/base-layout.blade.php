@@ -38,8 +38,13 @@
             </nav>
 
             <div class="px-6 py-5 border-t border-slate-700 text-sm">
-                <div class="text-slate-400">Ingelogd als</div>
-                <div class="font-medium">{{ auth()->user()->name }}</div>
+                @auth
+                    <div class="text-slate-400">Ingelogd als</div>
+                    <div class="font-medium">{{ auth()->user()->name }}</div>
+                @else
+                    <div class="text-slate-400">Niet ingelogd</div>
+                    <a href="{{ route('login') }}" class="font-medium hover:underline">Inloggen</a>
+                @endauth
             </div>
         </aside>
 
@@ -62,13 +67,15 @@
                             {{ now()->format('d M Y') }}
                         </span>
 
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button
-                                class="text-sm font-medium text-red-600 hover:text-red-700 transition">
-                                Uitloggen
-                            </button>
-                        </form>
+                        @auth
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button
+                                    class="text-sm font-medium text-red-600 hover:text-red-700 transition">
+                                    Uitloggen
+                                </button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             </header>

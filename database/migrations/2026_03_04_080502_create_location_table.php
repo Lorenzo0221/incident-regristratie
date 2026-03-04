@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('incidents', function (Blueprint $table) {
-            $table->foreignId('user_id')
-                ->constrained()
-                ->cascadeOnDelete();
+        Schema::create('location', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('postal_code')->unique();
+            $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('incidents', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('location');
     }
 };

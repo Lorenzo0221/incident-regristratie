@@ -22,14 +22,12 @@ class StoreIncidentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            $data = $this->validate([
-                'title' => 'required',
-                'description' => 'required',
-                'location' => 'required',
-                'type' => 'required',
-                'incident_at' => 'required|date',
-                'attachment' => 'nullable|file|max:2048',
-            ])
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'type' => 'required',
+            'incident_at' => 'required|date',
+            'attachment' => 'nullable|file|max:2048',
         ];
     }
 }

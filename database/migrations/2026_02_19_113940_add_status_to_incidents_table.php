@@ -31,14 +31,15 @@ return new class extends Migration
         }
     }
 
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('incidents', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('user_id');
-        });
+        if (Schema::hasColumn('incidents', 'user_id')) {
+            Schema::table('incidents', function (Blueprint $table) {
+                $table->dropConstrainedForeignId('user_id');
+            });
+        }
     }
 };

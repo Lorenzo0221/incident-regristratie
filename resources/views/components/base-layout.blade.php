@@ -26,6 +26,24 @@
 
                 <a href="{{ route('incidents.create') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-slate-700">
                     Nieuw incident
+                 <a href="{{ route('locations.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-700 transition">
+                    <span>📍</span> Location
+                </a>
+
+                       <a href="{{ route('types.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-700 transition">
+                    <span>❓</span> Type
+                </a>
+
+                  <a href="{{ route('incidents.map.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-700 transition">
+                    <span>🗺️</span> Map
+                </a>
+
+                <a href="{{ route('incidents.create') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-700 transition">
+                    <span>➕</span> Nieuw incident
                 </a>
 
                 <a href="{{ route('incidents.stats') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-slate-700">
@@ -51,6 +69,7 @@
                     <a href="{{ route('login') }}" class="font-medium hover:underline">Inloggen</a>
                 @endauth
             </div>
+            <!-- Geen gebruikersinfo, want geen auth -->
         </aside>
 
         <div class="flex flex-1 flex-col">
@@ -72,6 +91,17 @@
                                 </button>
                             </form>
                         @endauth
+                        <h1 class="text-2xl font-semibold">
+                            @yield('page-title', 'IncidentenDesk')
+                            <p class="text-sm text-slate-500">
+                                @yield('page-subtitle')
+                            </p>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm text-slate-500">
+                            {{ now()->format('d M Y') }}
+                        </span>
                     </div>
                 </div>
             </header>

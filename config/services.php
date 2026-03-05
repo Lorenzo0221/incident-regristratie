@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'incidents' => [
+        'base_url' => env('INCIDENTS_BASE_URL', 'https://ouaklcpzvuohkytnundu.supabase.co/functions/v1/'),
+        'api_key' => env('INCIDENTS_READ_API_KEY', env('API_KEY')),
+    ],
+
 ];

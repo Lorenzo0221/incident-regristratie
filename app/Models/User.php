@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function assignedIncidents()
     {
         return $this->hasMany(Incident::class, 'assignee_id');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 }

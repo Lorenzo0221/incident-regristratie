@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/incidents/stats', [IncidentController::class, 'stats'])->name('incidents.stats');
     Route::resource('incidents', IncidentController::class);
+
+    Route::middleware('admin')->group(function () {
+        Route::resource('users', UserController::class)->except(['show']);
+    });
 });
 
 Route::redirect('/incidents/index', '/incidents');
